@@ -520,3 +520,18 @@ footer .social-links a:hover {
 footer {
   animation: backgroundPulse 3s ease-in-out infinite; /* Subtle pulse effect */
 }
+
+.chat{
+  background-color: #ffffff00; /* Signature Apple Blue */
+  color: #000000;
+  padding: 15px 10px;
+  font-size: 18px;
+  border-style: none;
+}
+.chat:hover{
+  color: #005bb5;
+}
+.chat:active{
+  color: #0071e3;
+  font-size: 19px;
+}
