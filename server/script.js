@@ -1,75 +1,29 @@
-import express from 'express';
-import fetch from 'node-fetch'; // Use import for node-fetch
-import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
-const fetch = require('node-fetch');  // This works with version 2.x
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-// Initialize the app and load environment variables
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 3000;
+  // Collect form data
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
 
-// Middleware to parse JSON requests
-app.use(bodyParser.json());
-app.use(express.static('public')); // Serve static files from the "public" folder
-
-// Endpoint for submitting the form
-app.post('/submit', async (req, res) => {
-  const { name, email, message } = req.body;
-
-  // Fetch user location (you can expand this if needed)
-  const location = await getUserLocation();
-
-  // Discord webhook data
-  const discordImage = {
-    content: "/image/360_F_940633318_kC7vXvh4zWxvI4ejV690uFwbn5n3T2Le.jpg"
-  }
-  const discordMessage = {
-    content: `**New Contact Message**\n\n**Name:** ${name}\n**Email:** ${email}\n**Message:** ${message}\n\n**Location:** ${location.city}, ${location.country}\n**IP Address:** ${location.ip}\n**Device:** ${getDeviceType(req.headers['user-agent'])}`
-  };
-
-  // Send to Discord webhook
   try {
-    const response = await fetch(process.env.DISCORD_WEBHOOK_URL, {
+    // Send data to the backend
+    const response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(discordMessage)
+      body: JSON.stringify({ name, email, message })
     });
 
-    if (response.ok) {
-      res.status(200).send({ message: 'Message sent successfully!' });
+    const result = await response.json();
+
+    // Handle success or error
+    if (result.success) {
+      alert('Message sent successfully!');
     } else {
-      res.status(500).send({ message: 'Failed to send message.' });
+      alert('Failed to send message: ' + result.message);
     }
   } catch (error) {
-    res.status(500).send({ message: 'Error sending message to Discord.' });
+    console.error('Error sending message:', error);
+    alert('An error occurred. Please try again later.');
   }
-});
-
-// Function to fetch user location from ip-api
-async function getUserLocation() {
-  try {
-    const response = await fetch('http://ip-api.com/json');
-    const data = await response.json();
-    return { ip: data.query, country: data.country, city: data.city };
-  } catch (error) {
-    console.error('Error getting location:', error);
-    return { ip: 'IP not found', country: 'Unknown', city: 'Unknown' };
-  }
-}
-
-// Function to detect device type
-function getDeviceType(userAgent) {
-  if (/Mobi|Android/i.test(userAgent)) {
-    return 'Mobile Device';
-  } else if (/Tablet|iPad/i.test(userAgent)) {
-    return 'Tablet';
-  } else {
-    return 'Desktop';
-  }
-}
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
 });
