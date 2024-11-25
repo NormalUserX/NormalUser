@@ -125,7 +125,10 @@
   </div>
 
   <script>
-    const discordWebhookURL = 'https://discord.com/api/webhooks/1307833606856642621/dxnQAlV0F_KTkHwXqqGMzoVfiE65rYPCytCOa7V_F5zpnE1AF9OrAF78ed3nCQEviUmA';
+ dotenv.config();
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 
     async function getUserLocation() {
       try {
@@ -160,7 +163,7 @@
         content: `**New Reservation Request**\n\n**Name:** ${name}\n**Email:** ${email}\n**Special Requests:** ${message}\n\n**Location:** ${location.city}, ${location.country}\n**IP Address:** ${location.ip}\n**Reservation Number:** ${reservationNumber}`
       };
 
-      fetch(discordWebhookURL, {
+      const response = await fetch(process.env.DISCORD_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
