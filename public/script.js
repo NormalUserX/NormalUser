@@ -23,7 +23,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
   // Send form data to the backend server
   try {
-    const response = await fetch('http://localhost:3000/submit', {
+    const response = await fetch('https://normaluserx.github.io/NormalUserX/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
