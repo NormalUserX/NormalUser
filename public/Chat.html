@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Chat</title>
+  <title>Offline Chat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -60,7 +60,7 @@
   </style>
 </head>
 <body>
-  <h1>Online Chat</h1>
+  <h1>Offline Chat</h1>
   <div id="chatContainer">
     <div id="messages"></div>
     <div id="inputContainer">
@@ -68,33 +68,49 @@
       <button id="sendButton">Send</button>
     </div>
   </div>
+
   <script>
     const messagesDiv = document.getElementById('messages');
     const messageInput = document.getElementById('messageInput');
     const sendButton = document.getElementById('sendButton');
+    const localStorageKey = "offlineChatMessages";
 
-    const socket = new WebSocket('ws://localhost:3000');
-
-    // Listen for messages from the server
-    socket.onmessage = (event) => {
-      const message = document.createElement('div');
-      message.textContent = event.data;
-      messagesDiv.appendChild(message);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to the latest message
+    // Load messages from local storage
+    const loadMessages = () => {
+      const messages = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+      messagesDiv.innerHTML = '';
+      messages.forEach((msg) => {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = msg;
+        messagesDiv.appendChild(messageElement);
+      });
+      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to latest message
     };
 
-    // Send a message to the server
-    sendButton.addEventListener('click', () => {
-      if (messageInput.value.trim()) {
-        socket.send(messageInput.value);
-        messageInput.value = '';
-      }
-    });
+    // Save a new message to local storage
+    const saveMessage = (message) => {
+      const messages = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+      messages.push(message);
+      localStorage.setItem(localStorageKey, JSON.stringify(messages));
+    };
 
-    // Enable sending messages with Enter key
+    // Handle sending a message
+    const sendMessage = () => {
+      if (messageInput.value.trim()) {
+        saveMessage(messageInput.value.trim());
+        messageInput.value = '';
+        loadMessages();
+      }
+    };
+
+    // Initial load
+    loadMessages();
+
+    // Event listeners
+    sendButton.addEventListener('click', sendMessage);
     messageInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        sendButton.click();
+        sendMessage();
       }
     });
   </script>
