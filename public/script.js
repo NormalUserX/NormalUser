@@ -6,7 +6,7 @@ form.addEventListener('submit', async (e) => {
   const message = document.getElementById('message').value;
 
   // Send the form data to the server
-  const response = await fetch('/server/server.js', {  // Replace this with your actual backend URL
+  const response = await fetch('/server/server.mjs', {  // Replace this with your actual backend URL
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
