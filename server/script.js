@@ -27,3 +27,8 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     alert('An error occurred. Please try again later.');
   }
 });
+
+document.getElementById('hamburger').addEventListener('click', () => {
+  const navMenu = document.getElementById('navMenu');
+  navMenu.classList.toggle('show');
+});
