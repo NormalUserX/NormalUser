@@ -8,7 +8,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
   try {
     // Send data to the backend
-    const response = await fetch('/api/contact', {
+    const response = await fetch('https://normaluserx.github.io/NormalUser/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, message })
@@ -26,45 +26,4 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     console.error('Error sending message:', error);
     alert('An error occurred. Please try again later.');
   }
-});
-
-
-
-// online Chat
-
-const WebSocket = require('ws');
-const http = require('http');
-
-// Create an HTTP server
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('WebSocket server running...');
-});
-
-// Attach WebSocket server to the HTTP server
-const wss = new WebSocket.Server({ server });
-
-wss.on('connection', (ws) => {
-  console.log('New client connected!');
-
-  ws.on('message', (message) => {
-    console.log(`Received: ${message}`);
-
-    // Broadcast the message to all connected clients
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-
-  ws.on('close', () => {
-    console.log('Client disconnected.');
-  });
-});
-
-// Start the server
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Server is running on ws://localhost:${PORT}`);
 });
