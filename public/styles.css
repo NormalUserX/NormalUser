@@ -18,57 +18,58 @@ body {
 
 /* Header */
 /* Navigation Bar */
-header {
-  background-color: rgb(255, 255, 255); /* Clean white background */
-  position: sticky; /* Keeps the header at the top on scroll */
-  top: 0;
-  z-index: 1000; /* Ensures it stays above other elements */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  padding: 10px 20px;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px; /* Keeps content aligned */
-  margin: 0 auto;
-}
-
-.logo h1 {
-  font-family: 'Great Vibes', cursive; /* Elegant, jazz-inspired font */
-  font-size: 28px;
-  color: #0071e3; /* Apple Blue */
-}
-
-.logo h1:hover {
-  transform: scale(1.05); /* Slight zoom-in */
-  transition: transform 0.6s ease-out;
-}
-
-nav ul {
-  list-style: none; /* Removes default bullet points */
-  display: flex;
-  gap: 40px; /* Space between navigation items */
-}
-
-nav ul li a {
-  text-decoration: none; /* No underlines */
-  font-size: 19px;
-  font-weight: 500;
-  color: #333; /* Neutral text color */
-  transition: color 0.3s ease-in-out;
-}
-
-nav ul li a:hover {
-  color: #0071e3; /* Apple Blue on hover */
-}
-
-/* Mobile Friendly Navigation */
+/* Updated Mobile-Friendly Navigation */
 @media (max-width: 768px) {
+  nav {
+    position: relative;
+  }
+
+  .hamburger {
+    display: block; /* Show hamburger menu icon */
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    border: none;
+    outline: none;
+    color: #333;
+  }
+
+  .hamburger:hover {
+    color: #0071e3; /* Apple Blue on hover */
+  }
+
   nav ul {
-    flex-direction: column;
-    gap: 15px;
+    display: none; /* Initially hide the menu */
+    flex-direction: column; /* Stack links vertically */
+    gap: 10px; /* Reduced gap for compact design */
+    position: absolute;
+    top: 60px; /* Position below the header */
+    right: 10px; /* Align to the right */
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    padding: 20px;
+    border-radius: 8px; /* Rounded edges for a modern look */
+    z-index: 1000;
+  }
+
+  nav ul.show {
+    display: flex; /* Show the menu when toggled */
+  }
+
+  nav ul li {
+    margin: 0;
+  }
+
+  nav ul li a {
+    font-size: 18px; /* Slightly larger for better readability */
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+
+  nav ul li a:hover {
+    color: #0071e3; /* Apple Blue on hover */
   }
 }
 
