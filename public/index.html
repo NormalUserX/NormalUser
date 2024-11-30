@@ -3,64 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offline Chat</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-    }
-    #chatContainer {
-      display: flex;
-      flex-direction: column;
-      width: 90%;
-      max-width: 500px;
-      height: 80vh;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-top: 20px;
-      overflow: hidden;
-    }
-    #messages {
-      flex-grow: 1;
-      padding: 10px;
-      overflow-y: auto;
-      border-bottom: 1px solid #ccc;
-    }
-    #messages div {
-      margin: 5px 0;
-    }
-    #inputContainer {
-      display: flex;
-      padding: 10px;
-      background: #f9f9f9;
-    }
-    #inputContainer input {
-      flex-grow: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    #inputContainer button {
-      margin-left: 10px;
-      padding: 10px 15px;
-      background: #007bff;
-      border: none;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    #inputContainer button:hover {
-      background: #0056b3;
-    }
-  </style>
+  <title>Online Chat</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Offline Chat</h1>
+  <h1>Online Chat</h1>
   <div id="chatContainer">
     <div id="messages"></div>
     <div id="inputContainer">
@@ -69,47 +16,38 @@
     </div>
   </div>
 
+  <script src="/socket.io/socket.io.js"></script>
   <script>
-    const messagesDiv = document.getElementById('messages');
-    const messageInput = document.getElementById('messageInput');
-    const sendButton = document.getElementById('sendButton');
-    const localStorageKey = "offlineChatMessages";
+    const socket = io();
+    const messagesDiv = document.getElementById("messages");
+    const messageInput = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
 
-    // Load messages from local storage
-    const loadMessages = () => {
-      const messages = JSON.parse(localStorage.getItem(localStorageKey)) || [];
-      messagesDiv.innerHTML = '';
-      messages.forEach((msg) => {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = msg;
-        messagesDiv.appendChild(messageElement);
-      });
-      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to latest message
+    // Add a new message to the chat
+    const addMessage = (message) => {
+      const messageElement = document.createElement("div");
+      messageElement.textContent = message;
+      messagesDiv.appendChild(messageElement);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll
     };
 
-    // Save a new message to local storage
-    const saveMessage = (message) => {
-      const messages = JSON.parse(localStorage.getItem(localStorageKey)) || [];
-      messages.push(message);
-      localStorage.setItem(localStorageKey, JSON.stringify(messages));
-    };
-
-    // Handle sending a message
+    // Send a message
     const sendMessage = () => {
       if (messageInput.value.trim()) {
-        saveMessage(messageInput.value.trim());
-        messageInput.value = '';
-        loadMessages();
+        socket.emit("chatMessage", messageInput.value.trim());
+        messageInput.value = "";
       }
     };
 
-    // Initial load
-    loadMessages();
+    // Listen for incoming messages
+    socket.on("chatMessage", (message) => {
+      addMessage(message);
+    });
 
     // Event listeners
-    sendButton.addEventListener('click', sendMessage);
-    messageInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
+    sendButton.addEventListener("click", sendMessage);
+    messageInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
         sendMessage();
       }
     });
