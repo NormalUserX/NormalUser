@@ -1,49 +1,31 @@
-// Open video modal
-function openModal(videoSrc) {
-  const modal = document.getElementById('video-modal');
-  const player = document.getElementById('video-player');
-  player.src = videoSrc;
-  modal.style.display = 'flex';
-}
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
 
-// Close video modal
-function closeModal() {
-  const modal = document.getElementById('video-modal');
-  const player = document.getElementById('video-player');
-  player.pause();
-  player.src = '';
-  modal.style.display = 'none';
-}
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
-// Filter videos by category
-function filterByCategory(category) {
-  const videos = document.querySelectorAll('.video-card');
-  videos.forEach((video) => {
-    if (category === 'all' || video.dataset.category === category) {
-      video.style.display = 'block';
-    } else {
-      video.style.display = 'none';
-    }
+// Serve the HTML file
+app.use(express.static("public"));
+
+// Handle socket connections
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  // Broadcast messages to all users
+  socket.on("chatMessage", (msg) => {
+    io.emit("chatMessage", msg);
   });
-}
 
-// Filter videos by title
-function filterVideos() {
-  const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-  const videos = document.querySelectorAll('.video-card');
-  videos.forEach((video) => {
-    const title = video.dataset.title.toLowerCase();
-    if (title.includes(searchTerm)) {
-      video.style.display = 'block';
-    } else {
-      video.style.display = 'none';
-    }
+  // Handle user disconnect
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
   });
-}
+});
 
-// Add click events to video cards
-document.querySelectorAll('.video-card').forEach((video) => {
-  video.addEventListener('click', () => {
-    openModal('https://www.w3schools.com/html/mov_bbb.mp4'); // Replace with actual video source
-  });
+// Start server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
