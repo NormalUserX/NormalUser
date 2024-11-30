@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTube</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="MyTube Logo">
+    </div>
+    <input type="text" id="search-bar" placeholder="Search" onkeyup="filterVideos()">
+    <button class="search-button">🔍</button>
+  </header>
+
+  <!-- Sidebar -->
+  <aside>
+    <ul>
+      <li onclick="filterByCategory('all')">🏠 Home</li>
+      <li onclick="filterByCategory('music')">🎵 Music</li>
+      <li onclick="filterByCategory('education')">📘 Education</li>
+      <li onclick="filterByCategory('gaming')">🎮 Gaming</li>
+      <li onclick="filterByCategory('sports')">🏀 Sports</li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main>
+    <div class="video-grid" id="video-grid">
+      <!-- Video Cards -->
+      <div class="video-card" data-title="اقوى طاولة خبث بفالكونز 😂 بواسطة " data-category="gaming">
+        <img src="https://i.ytimg.com/vi/tnx59swZG_0/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLALvuXhm3dT1WF3eKjuFzG1NBeVeQ" alt="Video Thumbnail">
+        <h4>اقوى طاولة خبث بفالكونز 😂 بواسطة </h4>
+        <p>B22Gaming <br> 524K views • 3 days ago</p>
+      </div>
+      <div class="video-card" data-title="  24 ساعه بدون جوال 📵( أبها البهيه 😍)" data-category="home">
+        <img src="https://i.ytimg.com/vi/rA3-rEdQ8Wo/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLC9yInhNZdjdrYGHTkNFYOKRc_A7w" alt="Video Thumbnail">
+        <h4>
+          24 ساعه بدون جوال 📵( أبها البهيه 😍)</h4>
+        <p>RAED <br>5.4M views • 6 days ago</p>
+      </div>
+      <div class="video-card" data-title="Beat Ronaldo, Win $1,000,000" data-category="gaming">
+        <img src="https://i9.ytimg.com/vi/0BjlBnfHcHM/hq720_custom_1.jpg?sqp=CJSQrboG-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLATxXW3TJ9oyt0RwTDMQ_s9u04AkQ" alt="Video Thumbnail">
+        <h4>MrBeast <br>Beat Ronaldo, Win $1,000,000</h4>
+        <p>
+          946,987 views • 18 minutes ago</p>
+      </div>
+      <div class="video-card" data-title="Relaxing Piano Music" data-category="music">
+        <img src="https://via.placeholder.com/200x120" alt="Video Thumbnail">
+        <h4>Relaxing Piano Music</h4>
+        <p>Chill Vibes • 300K views • 3 days ago</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Video Player Modal -->
+  <div id="video-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <video id="video-player" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
