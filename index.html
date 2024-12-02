@@ -1,108 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Jazz Seafood Restaurant</title>
-  <link rel="stylesheet" href="public/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <style></style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio website of TG - Web Developer, Designer, and Problem Solver. Explore my skills and get in touch!">
+    <title>Portfolio | TG</title>
+    <style>
+        /* Universal Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #121212;
+            color: #f2f2f2;
+            overflow-x: hidden;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #17a74a;
+        }
+        /* Header Section */
+        header {
+            background: linear-gradient(to right, #2f2f2f, #1db954);
+            text-align: center;
+            padding: 5rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        header h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        header a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #1db954;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header a:hover {
+            background-color: #17a74a;
+            color: #ffffff;
+        }
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #222;
+            z-index: 10;
+            padding: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav ul li a {
+            text-transform: uppercase;
+            color: #f2f2f2;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #1db954;
+            transform: scale(1.1);
+        }
+        /* Section Styles */
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+        section {
+            margin-bottom: 4rem;
+        }
+        section h2 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid #1db954;
+            display: inline-block;
+            padding-bottom: 0.3rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        section p {
+            font-size: 1.2rem;
+        }
+        /* About Section */
+        #about p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        /* Skills Section */
+        #skills {
+            padding: 4rem 0;
+            background-color: #222;
+            color: #f2f2f2;
+            text-align: center;
+        }
+        #skills h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .skill-card {
+            background: #333;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+        }
+        .skill-card img {
+            width: 80px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .skill-card img:hover {
+            transform: scale(1.1);
+        }
+        .skill-card h3 {
+            color: #1db954;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .skill-card p {
+            font-size: 1rem;
+        }
+        /* Experience Section */
+        #experience {
+            padding: 4rem 0;
+            background-color: #222;
+            color: #f2f2f2;
+            text-align: center;
+        }
+        #experience h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .experience-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .experience-card {
+            background-color: #333;
+            padding: 2rem;
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+        }
+        .experience-card h4 {
+            font-size: 1.5rem;
+            color: #1db954;
+            margin-bottom: 1rem;
+        }
+        .experience-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        /* Testimonials Section */
+        #testimonials {
+            padding: 4rem 0;
+            background-color: #2f2f2f;
+            color: #f2f2f2;
+            text-align: center;
+        }
+        #testimonials h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .testimonial-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .testimonial-card {
+            background-color: #333;
+            width: 300px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #f2f2f2;
+            text-align: center;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+        }
+        .testimonial-card p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        .testimonial-card h4 {
+            font-size: 1.5rem;
+            color: #1db954;
+            font-weight: bold;
+        }
+        .testimonial-card span {
+            display: block;
+            font-size: 1rem;
+            color: #f2f2f2;
+            margin-top: 0.5rem;
+        }
+        /* Contact Section */
+        #contact {
+            padding: 4rem 0;
+            background-color: #222;
+            color: #f2f2f2;
+            text-align: center;
+        }
+        #contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #333;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid #1db954;
+            background-color: #2f2f2f;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        .contact-form button {
+            padding: 1rem 2rem;
+            background-color: #1db954;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: #17a74a;
+        }
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #121212;
+            color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Web Developer | Designer | Problem Solver</p>
+        <a href="#contact">Get in Touch</a>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  <!-- Navigation -->
-<header>
-  <nav>
-    <div class="logo">
-      <h1>Jazz SeaFood</h1>
-    </div>
-    <button class="hamburger" id="hamburger">&#9776;</button> <!-- Hamburger Menu -->
-    <ul id="navMenu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <p>I'm a web developer with a passion for creating user-friendly, interactive websites and applications. With expertise in HTML, CSS, and JavaScript, I aim to provide seamless and responsive web experiences.</p>
+    </section>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h2>Where Fresh Seafood Meets the Soul of Jazz</h2>
-      <p>Experience the rhythm of flavor!</p>
-      <a href="#menu" class="cta-btn">Explore Menu</a>
-    </div>
-  </section>
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <div class="skills">
+            <div class="skill-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3291/3291670.png" alt="HTML Logo">
+                <h3>HTML</h3>
+                <p>Expert in semantic and accessible markup.</p>
+            </div>
+            <div class="skill-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Official_CSS_Logo.svg/1200px-Official_CSS_Logo.svg.png" alt="CSS Logo">
+                <h3>CSS</h3>
+                <p>Proficient in modern CSS, CSS Grid, Flexbox, and responsive design principles.</p>
+            </div>
+            <div class="skill-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png" alt="JavaScript Logo">
+                <h3>JavaScript</h3>
+                <p>Experienced in creating interactive web applications, animations, and solving complex problems.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Menu Section -->
-  <section id="menu">
-    <h2>Our Menu</h2>
-    <div class="menu-items">
-      <div class="menu-item">
-        <img src="image/360_F_940633318_kC7vXvh4zWxvI4ejV690uFwbn5n3T2Le.jpg" alt="Shrimp Cocktail">
-        <h3>Shrimp Cocktail</h3>
-        <p>With Spicy Jazz Sauce</p>
-        <span class="price">$12</span>
-      </div>
-      <div class="menu-item">
-        <img src="image/grilled-seafood-plate-fresh-healthy-gourmet-generated-by-ai_188544-13420.avif" alt="Grilled Lobster Tail">
-        <h3>Grilled Lobster Tail</h3>
-        <p>With Blue Note Butter</p>
-        <span class="price">$25</span>
-      </div>
-      <div class="menu-item">
-        <img src="image/sweet-seduction-chocolate-cake-symphony-chocolate-cake-photo_1036998-33101.avif" alt="Chocolate Jazz Cake">
-        <h3>Chocolate Jazz Cake</h3>
-        <p>Drizzled with Berry Compote</p>
-        <span class="price">$8</span>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Live Jazz Events -->
-  <section id="events">
-    <h2>Live Jazz Nights</h2>
-    <div class="events-list">
-      <div class="event-item">
-        <h3>Monday Night Jazz</h3>
-        <p>Join us for live jazz performances every Monday.</p>
-        <a href="public/reserve" class="cta-btn">Reserve a Table</a>
-      </div>
-      <div class="event-item">
-        <h3>Jazz & Seafood Special</h3>
-        <p>Enjoy a special seafood platter with live jazz every Friday night!</p>
-        <a href="public/reserve" class="cta-btn">Reserve a Table</a>
-      </div>
-    </div>
-  </section>
+    <section id="experience" class="container">
+        <h2>Experience</h2>
+        <div class="experience-container">
+            <div class="experience-card">
+                <h4>Front-End Developer | Company X</h4>
+                <p>Developed responsive websites, optimized user interfaces, and enhanced user experiences for clients. Led front-end development projects from concept to deployment using HTML, CSS, and JavaScript.</p>
+            </div>
+            <div class="experience-card">
+                <h4>Web Developer | Company Y</h4>
+                <p>Worked on the design, development, and maintenance of dynamic web applications. Implemented various functionalities using JavaScript and collaborated with designers to create user-friendly websites.</p>
+            </div>
+            <div class="experience-card">
+                <h4>Junior Developer | Company Z</h4>
+                <p>Assisted in the development of web applications, wrote clean, efficient code, and participated in code reviews. Gained experience in back-end technologies, database management, and full-stack development.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required>
+    <section id="testimonials" class="container">
+        <h2>What People Are Saying</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card">
+                <p>"TG is an outstanding developer with excellent problem-solving skills. The projects we worked on together were always successful! They have an exceptional understanding of modern web technologies."</p>
+                <h4>John Doe, CEO</h4>
+                <span>Company A</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"The websites TG created for our company helped increase user engagement and significantly improved our online presence. I highly recommend working with them."</p>
+                <h4>Jane Smith, Marketing Director</h4>
+                <span>Company B</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"I was amazed by TG's attention to detail and dedication to providing high-quality work. The solutions offered were innovative, and communication was top-notch throughout."</p>
+                <h4>Sarah Lee, Product Manager</h4>
+                <span>Company C</span>
+            </div>
+        </div>
+    </section>
 
-      <label for="email">Your Email:</label>
-      <input type="email" id="email" name="email" required>
+    <section id="contact" class="container">
+        <h2>Contact</h2>
+        <div class="contact-form">
+            <form action="mailto:tgtg7568@gmail.com" method="POST" enctype="text/plain">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
 
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" required></textarea>
-
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Jazz Seafood | All Rights @TG</p>
-    <p>Contact us: <a href="mailto:tgtg7568@gmail.com">tgtg7568@gmail.com</a></p>
-  </footer>
-<a href="public/index.html" class="chat">Hi come chat with me!</a>
-  <!-- JavaScript -->
-  <script src="server/script.js"></script>
+    <footer>
+        <p>Connect with me on <a href="https://github.com/NormalUserX">GitHub</a></p>
+    </footer>
 </body>
 </html>
