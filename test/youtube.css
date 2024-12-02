@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo img {
+  height: 30px;
+}
+
+#search-bar {
+  flex-grow: 1;
+  margin: 0 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+.search-button {
+  background: #f8f8f8;
+  border: none;
+  padding: 1px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background: #eaeaea;
+}
+
+/* Sidebar */
+aside {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 200px;
+  height: calc(100% - 60px);
+  background: #fff;
+  border-right: 1px solid #eaeaea;
+  padding: 10px 0;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+aside ul li {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+
+aside ul li:hover {
+  background: #eaeaea;
+  color: #000;
+}
+
+/* Main Content */
+main {
+  margin-top: 60px;
+  margin-left: 220px;
+  padding: 20px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.video-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.video-card img {
+  width: 100%;
+}
+
+.video-card h4 {
+  font-size: 16px;
+  margin: 10px;
+}
+
+.video-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 0 10px 10px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+}
+
+.modal-content video {
+  width: 100%;
+}
+
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
